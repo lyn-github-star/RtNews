@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load pagination_tags %}
+{% block title %}
+    首页
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="col-sm-2">
+            <div class="list-group side-bar">
+                <a class="list-group-item active" href="/index/">全部</a>
+                {% for row in new_type|slice:"9:" %}
+                    <a class="list-group-item" href="/index/?type_id={{ row.id }}">{{ row.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="post-list">
+                {% autopaginate content 5 %}
+                {% for item in content %}
+                    <div class="post-list-item">
+                        <div class="col-xs-5">
+                            <img class="post-object" src="/media/{{ item.image }}">
+                        </div>
+                        <div class="col-xs-7">
+                            <a href="/news/?news_id={{ item.id }}">
+                                <div class="post-heading">{{ item.title }}</div>
+                            </a>
+                            <p></p>
+                            <p class="text-muted">
+                        <span>
+                            <img class="avatar" src="/media/{{ item.user_id.image }}">
+                        {{ item.user_id.nickname }}
+                        </span> ⋅
+                                <span>
+                        {{ item.clicked }}
+                        </span> ⋅
+                                <span>
+                        {{ item.publish_time }}
+                        </span>
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+{#                {% paginate %}#}
+            </div>
+            {% paginate using "page.html" %}
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <form action="/index/" method="get">
+                    <input type="search" class="form-control" name="search" placeholder="搜索资讯">
+                </form>
+            </div>
+            <div class="side-bar-well clearfix">
+                <div class="col-sm-5"><img src="/static/img/1-1.png"></div>
+                <div class="col-sm-7">
+                    <p class="side-bar-well-title">
+                        网上有害信息举报专区
+                    </p>
+                    <p>举报电话：12377</p>
+                </div>
+            </div>
+            <div class="side-bar-well">
+                <strong class="side-bar-well-title">
+                    24小时热闻
+                </strong>
+                <a href="#" class="news-item">
+                    <div class="news-title">Consectetur adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        5.9万次播放 ⋅ 167评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Lorem adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        8.9万次播放 ⋅ 3367评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Consectetur adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        5.9万次播放 ⋅ 167评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Lorem adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        8.9万次播放 ⋅ 3367评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Consectetur adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        5.9万次播放 ⋅ 167评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Lorem adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        8.9万次播放 ⋅ 3367评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Consectetur adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        5.9万次播放 ⋅ 167评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Lorem adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        8.9万次播放 ⋅ 3367评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Consectetur adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        5.9万次播放 ⋅ 167评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Lorem adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        8.9万次播放 ⋅ 3367评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Consectetur adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        5.9万次播放 ⋅ 167评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Lorem adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        8.9万次播放 ⋅ 3367评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Consectetur adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        5.9万次播放 ⋅ 167评论
+                    </div>
+                </a>
+                <a href="#" class="news-item">
+                    <div class="news-title">Lorem adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        8.9万次播放 ⋅ 3367评论
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -13,9 +13,34 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from http import server
+
+from django.conf.urls import url
+from django.views.generic import TemplateView
+
+import xadmin
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
+
+from django.conf import settings
+from django.views.static import serve
+from news_app.views import index, login, register, logout, ForCodeView, VerifyCodeHandel
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', xadmin.site.urls),
+    re_path('^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    # path('base/',TemplateView.as_view(template_name='base.html')),
+    # path('index/',TemplateView.as_view(template_name='index.html')),
+    # path('login/',TemplateView.as_view(template_name='login.html')),
+    path('news/', TemplateView.as_view(template_name='news.html')),
+    # path('signup/',TemplateView.as_view(template_name='signup.html')),
+    path('signup/', register),
+    path('login/', login),
+    path('logout/', logout),
+    # path('lyn_xunhuan/',lyn_xunhuan),
+    path('index/', index),
+    path('forcode/', ForCodeView.as_view(), name='forcode'),
+    url(r'^captcha/', include('captcha.urls')),
+    path('sendcode/', VerifyCodeHandel.as_view() )
 ]

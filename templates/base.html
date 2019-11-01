@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}BASE{% endblock %}</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/main.css">
+    {% block link %}
+
+    {% endblock %}
+
+    <script src="/static/js/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    {% block head_script %}
+
+    {% endblock %}
+</head>
+
+<body>
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">
+            </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/index/">热闻 ⋅ 拴蛋头条</a></li>
+            {% for row in new_type|slice:"4:14" %}
+            <li><a href="/index/?type_id={{ row.id}}">{{ row.name}}</a></li>
+            {% endfor %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+              {% if request.session.is_login %}
+                  <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
+                  <li><a href="/logout">登出</a></li>
+              {% else %}
+                  <li><a href="/login">登录</a></li>
+                  <li><a href="/signup">注册</a></li>
+              {% endif %}
+          </ul>
+    </div>
+</div>
+
+{% block container %}
+
+{% endblock %}
+
+<div class="footer">
+    © 2017 拴蛋头条 中国互联网举报中心京ICP证1401号京ICP备125439号-3京公网安备
+</div>
+</body>
+
+</html>
