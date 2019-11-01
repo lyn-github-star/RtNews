@@ -125,6 +125,14 @@ def logout(request):
 #
 #     return HttpResponse("ok")
 
+class News(View):
+    def get(self, request, content_id):
+        types = Type.objects.all()
+        data = Content.objects.get(id=content_id)
+        data.clicked = int(data.clicked) + 1
+        data.save()
+        return render(request, "news.html", locals())
+
 
 class ForCodeView(View):
     """获取手机验证码"""
@@ -141,7 +149,6 @@ class ForCodeView(View):
             if res:
                 # 生成手机验证码
                 result, code = send_sms(mobile)
-                print(code)
                 if result == 0:
                     ver = VerifyCode.objects.filter(mobile=mobile)
                     if ver:

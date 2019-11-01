@@ -24,7 +24,7 @@ from django.urls import path, re_path, include
 
 from django.conf import settings
 from django.views.static import serve
-from news_app.views import index, login, register, logout, ForCodeView, VerifyCodeHandel
+from news_app.views import index, login, register, logout, ForCodeView, VerifyCodeHandel, News
 
 urlpatterns = [
     path('admin/', xadmin.site.urls),
@@ -33,7 +33,8 @@ urlpatterns = [
     # path('base/',TemplateView.as_view(template_name='base.html')),
     # path('index/',TemplateView.as_view(template_name='index.html')),
     # path('login/',TemplateView.as_view(template_name='login.html')),
-    path('news/', TemplateView.as_view(template_name='news.html')),
+    # path('news/<int:contend_id>/', News.as_view()),
+    url(r"^news/(?P<content_id>\d+)", News.as_view()),
     # path('signup/',TemplateView.as_view(template_name='signup.html')),
     path('signup/', register),
     path('login/', login),
@@ -42,5 +43,5 @@ urlpatterns = [
     path('index/', index),
     path('forcode/', ForCodeView.as_view(), name='forcode'),
     url(r'^captcha/', include('captcha.urls')),
-    path('sendcode/', VerifyCodeHandel.as_view() )
+    path('sendcode/', VerifyCodeHandel.as_view())
 ]
